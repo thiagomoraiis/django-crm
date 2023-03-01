@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block title %}{% endblock %}
+{% bootstrap_css %}
+{% block content %}
+<div class="container">
+ {% bootstrap_messages %}
+ <form action="{% url 'form' %}" method="post" class="form row g-3">{% csrf_token %}
+    <div class="col-10 pr mb-3">
+        <label for="tipo_receita" class="form-label" style="text-transform: capitalize;" >Tipo de receita</label>
+        <input type="text" name="tipo_receita" id="tipo_receita" class="form-control">
+    </div>
+    <div class="col-10 pr mb-3">
+        <label for="valor" class="form-label">Valor</label>
+        <input type="number" name="valor" id="valor" class="form-control">
+    </div>
+    <div class="col-5 mb-3">
+        <button type="submit" class="d-block btn btn-primary">Enviar</button>
+    </div>
+ </form>
+</div>
+{% endblock %}
+{% bootstrap_javascript %}
