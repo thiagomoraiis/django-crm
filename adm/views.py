@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
-from .models import Receita
+from .models import Receita, Teste
 from .forms import ReceitaModelForm, TesteModelForm
 from django.contrib import messages
 
@@ -51,26 +51,33 @@ def form(request):
     return HttpResponse(template.render(context, request))
 
 def registros(request):
-    # receita = Receita.objects.values('')
     template = loader.get_template('registros.html')
-    return HttpResponse(template.request)
-
-def teste(request):
-    template = loader.get_template('teste.html')
-    if request.method == 'POST':
-        teste = TesteModelForm(request.POST or None)
-        if teste.is_valid():
-            r = teste.save(commit=False)
-            r.tipo_receita = teste.cleaned_data['tipo_receita']
-            r.valor = teste.cleaned_data['valor']
-            r.save()
-            teste = TesteModelForm()
-            messages.success(request, 'Formulario salvo com sucesso')
-        else:
-            messages.error(request, 'Erro ao salvar o formulario')
-    else:
-        teste = TesteModelForm()
+    receita = Receita.objects.filter(tipo_receita='receita')
     context = {
-        'teste':teste
+        'receita':receita
+    }
+    return HttpResponse(template.render(context, request))
+
+def edit(request, id):
+    template = loader.get_template('edit.html')
+    ed = Receita.objects.get(id=id)
+    if request.method == 'POST':
+        ed.tipo_receita = request.POST['tipo_receita']
+        ed.valor = request.POST['valor']
+        ed.save()
+        return redirect('registros')
+    context = {
+        'ed':ed
+    }
+    return HttpResponse(template.render(context, request))
+
+def deletar(request, id):
+    template = loader.get_template('deletar.html')
+    de = Receita.objects.get(id=id)
+    if request.method == 'POST':
+        de.delete()
+        return redirect('registros')
+    context = {
+        'de':de
     }
     return HttpResponse(template.render(context, request))

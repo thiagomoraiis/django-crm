@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, error404, login, register, forgot_password, blank, form, registros, teste
+from .views import index, error404, login, register, forgot_password, blank, form, registros, edit, deletar
 
 urlpatterns = [
     path('', index, name='index'),
@@ -10,5 +10,6 @@ urlpatterns = [
     path('blank', blank, name='blank'),
     path('form', form, name='form'),
     path('registros', registros, name='registros'),
-    path('teste', teste, name='teste')
+    path('edit/<int:id>', edit, name='edit'),
+    path('deletar/<int:id>', deletar, name='deletar')
 ]

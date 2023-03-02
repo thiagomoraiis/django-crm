@@ -8,7 +8,10 @@
  <form action="{% url 'form' %}" method="post" class="form row g-3">{% csrf_token %}
     <div class="col-10 pr mb-3">
         <label for="tipo_receita" class="form-label" style="text-transform: capitalize;" >Tipo de receita</label>
-        <input type="text" name="tipo_receita" id="tipo_receita" class="form-control">
+        <select name="tipo_receita" id="tipo_receita" class="form-select">
+            <option selected value="receita">Receita</option>
+            <option value="despesa">Despesa</option>
+        </select>
     </div>
     <div class="col-10 pr mb-3">
         <label for="valor" class="form-label">Valor</label>

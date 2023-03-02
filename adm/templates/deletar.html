@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% block title %}
+ Deletar
+{% endblock %}
+{% block content %}
+<h1>Deletar</h1>
+<form action="" class="row" method="post">{% csrf_token %}
+    <h3>Deseja excluir o objeto "{{ object }}"</h3>
+    <div class="col">
+        <button class="btn btn-danger" type="submit">Excluir</button>
+        <a href="{% url 'registros' %}" class="btn btn-primary">Voltar para a pagina de registros</a>
+    </div>
+</form>
+{% endblock %}
+{% bootstrap_javascript %}
