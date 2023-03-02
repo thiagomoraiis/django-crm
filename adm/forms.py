@@ -1,5 +1,5 @@
 from django import forms
-from .models import Receita
+from .models import Receita, Teste
 
 # RECEITA_NAME_CHOICES = [
 #     ('receita', 'receita'),
@@ -12,4 +12,9 @@ class ReceitaModelForm(forms.ModelForm):
     # ).capitalize()
     class Meta:
         model = Receita
+        fields = '__all__'
+
+class TesteModelForm(forms.ModelForm):
+    class Meta:
+        model = Teste
         fields = '__all__'

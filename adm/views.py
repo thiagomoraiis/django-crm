@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
 from .models import Receita
-from .forms import ReceitaModelForm
+from .forms import ReceitaModelForm, TesteModelForm
 from django.contrib import messages
 
 def index(request):
@@ -52,5 +52,25 @@ def form(request):
 
 def registros(request):
     # receita = Receita.objects.values('')
-    template = loader.get_template
+    template = loader.get_template('registros.html')
     return HttpResponse(template.request)
+
+def teste(request):
+    template = loader.get_template('teste.html')
+    if request.method == 'POST':
+        teste = TesteModelForm(request.POST or None)
+        if teste.is_valid():
+            r = teste.save(commit=False)
+            r.tipo_receita = teste.cleaned_data['tipo_receita']
+            r.valor = teste.cleaned_data['valor']
+            r.save()
+            teste = TesteModelForm()
+            messages.success(request, 'Formulario salvo com sucesso')
+        else:
+            messages.error(request, 'Erro ao salvar o formulario')
+    else:
+        teste = TesteModelForm()
+    context = {
+        'teste':teste
+    }
+    return HttpResponse(template.render(context, request))

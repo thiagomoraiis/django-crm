@@ -15,3 +15,10 @@ class Receita(models.Model):
 
     def __str__(self) -> str:
         return f'{self.tipo_receita.title().strip()} R${self.valor}'
+    
+class Teste(models.Model):
+    tipo_receita = models.CharField('Informe qual o tipo de receita', max_length=8)
+    valor = models.DecimalField('Informe o valor', max_digits=20, decimal_places=2)
+
+    def __str__(self) -> str:
+        return f'{self.tipo_receita.title().strip()} R${self.valor}'
