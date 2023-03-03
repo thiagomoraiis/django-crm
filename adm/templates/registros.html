@@ -16,13 +16,13 @@
         </thead>
         <tbody>
             {% for i in receita %}
-             <tr class="col" >
+             <tr class="col {% if i.tipo_receita == 'receita' %} text-success {% else %} text-danger {% endif %}">
                 <td scope="row"> {{ i.id }}</td>
                 <td scope="row" style="text-transform: capitalize;" >{{ i.tipo_receita }}</td>
                 <td scope="row" >R$ {{ i.valor }}</td>
                 <td scope="row" >
-                    <a class="btn btn-primary" href="#">Editar</a>
-                    <a class="btn btn-danger" href="#">Excluir</a>
+                    <a class="btn btn-primary" href="{% url 'edit' id=i.id %}">Editar</a>
+                    <a class="btn btn-danger" href="{% url 'deletar' id=i.id %}">Excluir</a>
                 </td>
              </tr>
             {% endfor %}

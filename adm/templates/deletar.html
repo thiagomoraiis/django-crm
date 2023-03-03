@@ -7,8 +7,8 @@
 {% endblock %}
 {% block content %}
 <h1>Deletar</h1>
-<form action="" class="row" method="post">{% csrf_token %}
-    <h3>Deseja excluir o objeto "{{ object }}"</h3>
+<h3 style="text-transform: capitalize;">Deseja excluir "{{ de.tipo_receita }} - R${{ de.valor }}"?</h3>
+<form action="{% url 'deletar' de.id %}" class="row" method="post">{% csrf_token %}
     <div class="col">
         <button class="btn btn-danger" type="submit">Excluir</button>
         <a href="{% url 'registros' %}" class="btn btn-primary">Voltar para a pagina de registros</a>

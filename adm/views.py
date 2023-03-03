@@ -60,7 +60,8 @@ def form(request):
 
 def registros(request):
     template = loader.get_template('registros.html')
-    receita = Receita.objects.filter(tipo_receita='receita')
+    # receita = Receita.objects.filter(tipo_receita='receita')
+    receita = Receita.objects.all()
     context = {
         'receita':receita
     }
