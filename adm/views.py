@@ -6,8 +6,8 @@ from .forms import ReceitaModelForm, TesteModelForm
 from django.contrib import messages
 from django.db.models import Sum
 
-def index(request):
-    template = loader.get_template('index.html')
+def dashboard(request):
+    template = loader.get_template('dashboard.html')
     soma = Receita.objects.aggregate(soma=Sum('valor'))['soma']
     soma = round(soma, 2)
     ano = soma * 12
