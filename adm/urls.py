@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import dashboard, error404, login, register, forgot_password, blank, form, registros, edit, deletar
+from .views import dashboard, error404, login, register, forgot_password, blank, form, registros, edit, deletar , solicitacoes, criar_solicatacao, teste
 
 urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
@@ -11,5 +11,8 @@ urlpatterns = [
     path('form/', form, name='form'),
     path('registros/', registros, name='registros'),
     path('edit/<int:id>/', edit, name='edit'),
-    path('deletar/<int:id>/', deletar, name='deletar')
+    path('deletar/<int:id>/', deletar, name='deletar'),
+    path('solicitacoes/', solicitacoes, name='solicitacoes'),
+    path('solicitar', criar_solicatacao, name='solicitar'),
+    path('teste/', teste, name='teste')
 ]

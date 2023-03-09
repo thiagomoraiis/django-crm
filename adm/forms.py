@@ -1,20 +1,22 @@
 from django import forms
-from .models import Receita, Teste
+from .models import Receita,Solicitacoes, Teste
 
-# RECEITA_NAME_CHOICES = [
-#     ('receita', 'receita'),
-#     ('despesa', 'despesa'),  
-# ]
 class ReceitaModelForm(forms.ModelForm):
-    # tipo_receita = forms.ChoiceField(
-    #     widget=forms.Select,
-    #     choices=RECEITA_NAME_CHOICES 
-    # ).capitalize()
     class Meta:
         model = Receita
         fields = '__all__'
 
+class SolicitacaoModelForm(forms.ModelForm):
+    class Meta:
+        model = Solicitacoes
+        fields = '__all__'
+
 class TesteModelForm(forms.ModelForm):
+    # nome = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    # sobrenome = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    # email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    # ativo = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
+    
     class Meta:
         model = Teste
-        fields = '__all__'
+        fields = ['nome', 'sobrenome', 'email', 'ativo']

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% block title %}Form{% endblock %}
+{% block content %}
+<div class="container">
+    <form class="form" action="" method="post">{% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="col">
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </div>
+    </form>
+</div>
+{% bootstrap_javascript %}
+{% endblock %}

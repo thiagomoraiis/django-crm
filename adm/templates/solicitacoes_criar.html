@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% block title %}Solicitar{% endblock %}
+{% block content %}
+<div class="container">
+    <form action="" method="post">{% csrf_token %}
+        {% bootstrap_messages %}
+        <div class="col mb-3">
+            <label for="titulo" class="form-label">Titulo da solicitação</label>
+            <input type="text" name="titulo" id="titulo" class="form-control">
+        </div>
+        <div class="col mb-3">
+            <label for="conteudo" class="form-label">Conteudo da solicitação</label>
+            <input type="text" name="conteudo" id="conteudo" class="form-control">
+        </div>
+        <div class="col mb-3">
+            <div class="form-check">
+                <input type="radio" name="pendencia" id="pendencia" class="form-check-input">
+                <label for="pendente" class="form-check-label">Não Pendente</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="pendencia" id="pendencia" class="form-check-input" checked>
+                <label for="pendente" class="form-check-label">Pendente</label>
+            </div>
+        </div>
+        <div class="col mb-3">
+            <select class="form-control" name="adm" id="adm">
+                <option selected value="thiago">Thiago</option>
+                <option value="lucas">Lucas</option>
+                <option value="alguem">Alguem</option>
+            </select>
+        </div>
+        <div class="col mb-3">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+    </form>
+</div>
+{% bootstrap_javascript %}
+{% endblock %}

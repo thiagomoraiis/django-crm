@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Solicitações{% endblock %}
+{% block content %}
+<h3 class="h3 text-gray-800">Solicitações</h3>
+<div class="container">
+    <div class="row">
+        <div class="card m-3" style="width: 15rem;">
+            <div class="card-body">
+                <h5 class="card-title" >Titulo</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, asperiores provident.</p>
+                <a href="#" class="btn btn-primary">Editar solicitação</a>
+            </div>
+        </div>
+        <div class="card m-3" style="width: 15rem;">
+            <div class="card-body">
+                <h5 class="card-title" >Titulo</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, asperiores provident.</p>
+                <a href="#" class="btn btn-primary">Editar solicitação</a>
+            </div>
+        </div>
+        <div class="card m-3" style="width: 15rem;">
+            <div class="card-body">
+                <h5 class="card-title" >Titulo</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, asperiores provident.</p>
+                <a href="#" class="btn btn-primary">Editar solicitação</a>
+            </div>
+        </div>
+        <div class="card m-3" style="width: 15rem;">
+            <div class="card-body">
+                <h5 class="card-title" >Titulo</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, asperiores provident.</p>
+                <a href="#" class="btn btn-primary">Editar solicitação</a>
+            </div>
+        </div>
+    </div>
+    <div class="col mb-3">
+        <a class="btn btn-primary" href="{% url 'solicitar' %}">Solicitar algo</a>
+    </div>
+</div>
+{% endblock %}
