@@ -17,6 +17,8 @@ class TesteModelForm(forms.ModelForm):
     # email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
     # ativo = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
     
+    ativo = forms.BooleanField(widget=forms.RadioSelect(choices=[(True, 'Concluído'), (False, 'Não concluído')]))
+
     class Meta:
         model = Teste
         fields = ['nome', 'sobrenome', 'email', 'ativo']

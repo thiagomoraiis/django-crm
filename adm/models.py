@@ -20,7 +20,7 @@ class Solicitacoes(models.Model):
     titulo = models.CharField('Titulo da solicitação', max_length=75)
     conteudo = models.CharField('Conteudo da solicitação', max_length=125)
     adm = models.ForeignKey(Gerenciador, on_delete=models.CASCADE)
-    pendencia = models.BooleanField('Pendencia', default=False)
+    pendencia = models.BooleanField(default=False)
 
     def __str__(self):
         return self.titulo

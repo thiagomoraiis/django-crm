@@ -7,7 +7,7 @@ class ReceitaAdminModel(admin.ModelAdmin):
 
 @admin.register(Solicitacoes)
 class SolicitacaoModelAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'conteudo', 'adm')
+    list_display = ('titulo', 'conteudo', 'adm', 'pendencia')
 
 @admin.register(Gerenciador)
 class GerenciadorModelAdmin(admin.ModelAdmin):

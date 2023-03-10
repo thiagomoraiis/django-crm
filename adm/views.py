@@ -95,36 +95,36 @@ def solicitacoes(request):
     template = loader.get_template('solicitacoes.html')
     return HttpResponse(template.render())
 
-def criar_solicatacao(request):
-    template = loader.get_template('solicitacoes_criar.html')
-    if request.method == 'POST':
-        sol = SolicitacaoModelForm(request.POST)
-        if sol.is_valid():
-            form = sol.save(commit=False)
-            form.titulo = sol.cleaned_data['titulo']
-            form.conteudo = sol.cleaned_data['conteudo']
-            form.adm = sol.cleaned_data['adm']
-            form.pendencia = sol.cleaned_data['pendencia']
-            form.save()
-            return redirect('solicitacoes')
-        else:
-            messages.error(request, 'Erro ao criar a solitação. Verifique se todos os campos estão preenchidos')
-    else:
-        sol = SolicitacaoModelForm()
-    context = {
-        'sol':sol
-    }
-    return HttpResponse(template.render(context, request))
+# def criar_solicatacao(request):
+#     template = loader.get_template('solicitacoes_criar.html')
+#     if request.method == 'POST':
+#         sol = SolicitacaoModelForm(request.POST)
+#         if sol.is_valid():
+#             form = sol.save(commit=False)
+#             form.titulo = sol.cleaned_data['titulo']
+#             form.conteudo = sol.cleaned_data['conteudo']
+#             form.adm = sol.cleaned_data['adm']
+#             form.pendencia = sol.cleaned_data['pendencia']
+#             form.save()
+#             return redirect('solicitacoes')
+#         else:
+#             messages.error(request, 'Erro ao criar a solitação. Verifique se todos os campos estão preenchidos')
+#     else:
+#         sol = SolicitacaoModelForm()
+#     context = {
+#         'sol':sol
+#     }
+#     return HttpResponse(template.render(context, request))
 
 def teste(request):
     if request.method == 'POST':
-        form = TesteModelForm(request.POST)
+        form = SolicitacaoModelForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('dashboard')
     else:
-        form = TesteModelForm()
+        form = SolicitacaoModelForm()
     context={
         'form':form
     }
-    return render(request, 'teste.html', context)
+    return render(request, 'solicitacoes_criar.html', context)
