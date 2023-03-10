@@ -1,5 +1,5 @@
 from django import forms
-from .models import Receita,Solicitacoes, Teste
+from .models import Receita,Solicitacoes
 
 class ReceitaModelForm(forms.ModelForm):
     class Meta:
@@ -7,18 +7,22 @@ class ReceitaModelForm(forms.ModelForm):
         fields = '__all__'
 
 class SolicitacaoModelForm(forms.ModelForm):
+
     class Meta:
         model = Solicitacoes
-        fields = '__all__'
+        fields = ('titulo', 'conteudo', 'adm', 'concluido')
+        # widgets = {
+        #     'concluido': forms.CheckboxInput
+        # }
 
-class TesteModelForm(forms.ModelForm):
+# class TesteModelForm(forms.ModelForm):
     # nome = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     # sobrenome = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     # email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
     # ativo = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}))
     
-    ativo = forms.BooleanField(widget=forms.RadioSelect(choices=[(True, 'Concluído'), (False, 'Não concluído')]))
+    # ativo = forms.BooleanField(widget=forms.RadioSelect(choices=[(True, 'Concluído'), (False, 'Não concluído')]))
 
-    class Meta:
-        model = Teste
-        fields = ['nome', 'sobrenome', 'email', 'ativo']
+    # class Meta:
+    #     model = Teste
+    #     fields = ['nome', 'sobrenome', 'email', 'ativo']

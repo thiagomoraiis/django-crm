@@ -5,34 +5,20 @@
 <h3 class="h3 text-gray-800">Solicitações</h3>
 <div class="container">
     <div class="row">
+        {% for i in solicita %}
         <div class="card m-3" style="width: 15rem;">
-            <div class="card-body">
-                <h5 class="card-title" >Titulo</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, asperiores provident.</p>
-                <a href="#" class="btn btn-primary">Editar solicitação</a>
+            <h6 style="text-transform: capitalize;" class="card-header row">{{ i.titulo }}</h6>
+            <div class="card-body p-3">
+                <p style="text-transform: capitalize;" class="card-text mb-0">{{ i.conteudo }}</p><br>
+                <!-- <span class="card-text text-gray-800 text-100">{{ i.adm }}</span> -->
+                <span class="{% if i.concluido == True %} text-primary text-bold{% else %} text-warning {% endif %}">{% if i.concluido == True %}Concluido{% else %} Pendente {% endif %}</span><br>
+                <div style="padding-left: 0;" class="col">
+                    <!-- <a href="#" class="btn btn-primary">Editar</a> -->
+                    <a href="#" class="btn btn-success">Editar</a>
+                </div>
             </div>
         </div>
-        <div class="card m-3" style="width: 15rem;">
-            <div class="card-body">
-                <h5 class="card-title" >Titulo</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, asperiores provident.</p>
-                <a href="#" class="btn btn-primary">Editar solicitação</a>
-            </div>
-        </div>
-        <div class="card m-3" style="width: 15rem;">
-            <div class="card-body">
-                <h5 class="card-title" >Titulo</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, asperiores provident.</p>
-                <a href="#" class="btn btn-primary">Editar solicitação</a>
-            </div>
-        </div>
-        <div class="card m-3" style="width: 15rem;">
-            <div class="card-body">
-                <h5 class="card-title" >Titulo</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, asperiores provident.</p>
-                <a href="#" class="btn btn-primary">Editar solicitação</a>
-            </div>
-        </div>
+        {% endfor %}
     </div>
     <div class="col mb-3">
         <a class="btn btn-primary" href="{% url 'solicitar' %}">Solicitar algo</a>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Receita, Solicitacoes, Gerenciador, Teste
+from .models import Receita, Solicitacoes, Gerenciador
 
 @admin.register(Receita)
 class ReceitaAdminModel(admin.ModelAdmin):
@@ -7,12 +7,8 @@ class ReceitaAdminModel(admin.ModelAdmin):
 
 @admin.register(Solicitacoes)
 class SolicitacaoModelAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'conteudo', 'adm', 'pendencia')
+    list_display = ('titulo', 'conteudo', 'adm', 'concluido')
 
 @admin.register(Gerenciador)
 class GerenciadorModelAdmin(admin.ModelAdmin):
     list_display = ('nome', 'idade', 'email')
-
-@admin.register(Teste)
-class TesteAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'sobrenome', 'email')

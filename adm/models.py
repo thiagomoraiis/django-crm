@@ -1,4 +1,5 @@
 from django.db import models
+# from .utils import get_status_display
 
 class Gerenciador(models.Model):
     nome = models.CharField('Nome', max_length=150)
@@ -15,18 +16,26 @@ class Receita(models.Model):
 
     def __str__(self) -> str:
         return f'{self.tipo_receita.title().strip()} R${self.valor}'
-    
+
+# def get_status_display(value):
+#     if value:
+#         return 'Concluído'
+#     else:
+#         return 'Não Concluído'
+
+
 class Solicitacoes(models.Model):
     titulo = models.CharField('Titulo da solicitação', max_length=75)
     conteudo = models.CharField('Conteudo da solicitação', max_length=125)
     adm = models.ForeignKey(Gerenciador, on_delete=models.CASCADE)
-    pendencia = models.BooleanField(default=False)
+    concluido = models.BooleanField(default=False)
+    # status = models.CharField(max_length=20, choices=[(False, 'Não Concluído'), (True, 'Concluído')], default=get_status_display(False))
 
     def __str__(self):
         return self.titulo
     
-class Teste(models.Model):
-    nome = models.CharField('Nome',max_length=50)
-    sobrenome = models.CharField('Sobrenome',max_length=50)
-    email = models.EmailField('Email')
-    ativo = models.BooleanField('Ativo?',default=False)
+# class Teste(models.Model):
+#     nome = models.CharField('Nome',max_length=50)
+#     sobrenome = models.CharField('Sobrenome',max_length=50)
+#     email = models.EmailField('Email')
+#     ativo = models.BooleanField('Ativo?',default=False)

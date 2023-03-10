@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
-from .models import Receita, Solicitacoes, Teste
-from .forms import ReceitaModelForm, SolicitacaoModelForm, TesteModelForm
+from .models import Receita, Solicitacoes
+from .forms import ReceitaModelForm, SolicitacaoModelForm
 from django.contrib import messages
 from django.db.models import Sum
 
@@ -93,7 +93,11 @@ def deletar(request, id):
 
 def solicitacoes(request):
     template = loader.get_template('solicitacoes.html')
-    return HttpResponse(template.render())
+    solicita = Solicitacoes.objects.all()
+    context = {
+        'solicita':solicita
+    }
+    return HttpResponse(template.render(context, request))
 
 # def criar_solicatacao(request):
 #     template = loader.get_template('solicitacoes_criar.html')
@@ -116,12 +120,12 @@ def solicitacoes(request):
 #     }
 #     return HttpResponse(template.render(context, request))
 
-def teste(request):
+def solicitar(request):
     if request.method == 'POST':
         form = SolicitacaoModelForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('dashboard')
+            return redirect('solicitacoes')
     else:
         form = SolicitacaoModelForm()
     context={
