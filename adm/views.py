@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 from django.http import HttpResponse
 from .models import Receita, Solicitacoes
@@ -11,9 +11,16 @@ def dashboard(request):
     soma = Receita.objects.aggregate(soma=Sum('valor'))['soma']
     soma = round(soma, 2)
     ano = soma * 12
+    count_false = Solicitacoes.objects.filter(concluido=False).count()
+    count_true = Solicitacoes.objects.filter(concluido=True).count()
+    tudo = Solicitacoes.objects.values('concluido').count()
+    porcent = (count_true*100) / tudo
+    porcent = round(porcent, 2)
     context = {
         'soma':soma,
-        'ano': ano
+        'ano': ano,
+        'count_false':count_false,
+        'porcentagem':porcent,
     }
     return HttpResponse(template.render(context, request))
 
@@ -99,27 +106,6 @@ def solicitacoes(request):
     }
     return HttpResponse(template.render(context, request))
 
-# def criar_solicatacao(request):
-#     template = loader.get_template('solicitacoes_criar.html')
-#     if request.method == 'POST':
-#         sol = SolicitacaoModelForm(request.POST)
-#         if sol.is_valid():
-#             form = sol.save(commit=False)
-#             form.titulo = sol.cleaned_data['titulo']
-#             form.conteudo = sol.cleaned_data['conteudo']
-#             form.adm = sol.cleaned_data['adm']
-#             form.pendencia = sol.cleaned_data['pendencia']
-#             form.save()
-#             return redirect('solicitacoes')
-#         else:
-#             messages.error(request, 'Erro ao criar a solitação. Verifique se todos os campos estão preenchidos')
-#     else:
-#         sol = SolicitacaoModelForm()
-#     context = {
-#         'sol':sol
-#     }
-#     return HttpResponse(template.render(context, request))
-
 def solicitar(request):
     if request.method == 'POST':
         form = SolicitacaoModelForm(request.POST)
@@ -132,3 +118,29 @@ def solicitar(request):
         'form':form
     }
     return render(request, 'solicitacoes_criar.html', context)
+
+def edit_solicitar(request, id):
+    template = loader.get_template('edit_solicitar.html')
+    sol = get_object_or_404(Solicitacoes, id=id)
+    if request.method == 'POST':
+        form = SolicitacaoModelForm(request.POST, instance=sol)
+        if form.is_valid():
+            form.save()
+            return redirect('solicitacoes')
+    else:
+        form = SolicitacaoModelForm(instance=sol)
+    context = {
+        'form':form
+    }
+    return HttpResponse(template.render(context, request))
+
+def del_solicitar(request, id):
+    template = loader.get_template('del_solicitar.html')
+    de = get_object_or_404(Solicitacoes, id=id)
+    if request.method == 'POST':
+        de.delete()
+        return redirect('solicitacoes')
+    context={
+        'de':de
+    }
+    return HttpResponse(template.render(context, request))

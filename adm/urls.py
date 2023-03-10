@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import dashboard, error404, login, register, forgot_password, blank, form, registros, edit, deletar , solicitacoes
+# from .views import dashboard, error404, login, register, forgot_password, blank, form, registros, edit, deletar , solicitacoes
 from .views import solicitar
+from .views import *
 
 urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
@@ -15,5 +16,7 @@ urlpatterns = [
     path('deletar/<int:id>/', deletar, name='deletar'),
     path('solicitacoes/', solicitacoes, name='solicitacoes'),
     path('solicitar', solicitar, name='solicitar'),
+    path('edit_solicitar/<int:id>/', edit_solicitar, name='edit_solicitar'),
+    path('del_solicitar/<int:id>/', del_solicitar, name='del_solicitar'),
     # path('teste/', teste, name='teste')
 ]

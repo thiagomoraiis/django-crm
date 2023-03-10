@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% block title %}Deletar{% endblock %}
+{% block content %}
+<div class="container">
+    <form class="form" action="" method="post">{% csrf_token %}
+        <p>Deseja deletar o item {{ de.titulo }}?</p>
+        <div class="col">
+            <button type="submit" class="btn btn-danger">Deletar</button>
+            <a href="{% url 'solicitacoes' %}" class="btn btn-primary">Voltar</a>
+        </div>
+    </form>
+</div>
+{% bootstrap_javascript %}
+{% endblock %}

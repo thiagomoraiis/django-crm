@@ -20,8 +20,9 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Ganhos (Mensais)</div>
+                        <a class="text-xs font-weight-bold text-primary text-uppercase mb-1 text-decoration-none" href="">
+                            <div>Ganhos (Mensais)</div>
+                        </a>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">R${{ soma }}</div>
                     </div>
                     <div class="col-auto">
@@ -60,12 +61,12 @@
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ porcentagem }}%</div>
                             </div>
                             <div class="col">
                                 <div class="progress progress-sm mr-2">
-                                    <div class="progress-bar bg-info" role="progressbar"
-                                        style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                    <div class="progress-bar bg-info {% if porcentagem <= 21 %}w-20{% elif porcentagem <= 41 %}w-40{% elif porcentagem <= 61 %}w-60{% elif porcentagem <= 81 %}w-80{% elif porcentagem <= 100 %}w-100{% endif %}"  role="progressbar"
+                                        aria-valuenow="{{ porcentagem }}" aria-valuemin="0"
                                         aria-valuemax="100"></div>
                                 </div>
                             </div>
@@ -85,9 +86,9 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Solicitações pendentes</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        <a class="text-xs font-weight-bold text-warning text-uppercase mb-1 text-decoration-none" href="{% url 'solicitacoes' %}"><div>
+                            Solicitações pendentes</div></a>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count_false }}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-comments fa-2x text-gray-300"></i>
