@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% bootstrap_css %}
+{% block title %}Error (404){% endblock %}
+{% block content %}
+<h1 class="text-gray-800">Erro (404)</h1>
+<p class="h4 text-gray-800">A pagina que voce solicitou, não existe</p>
+<a href="{% url 'dashboard' %}" class="btn btn-primary mt-5">Volte para a pagina inicial</a>
+{% bootstrap_javascript %}
+{% endblock %}

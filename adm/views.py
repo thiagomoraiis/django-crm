@@ -32,9 +32,13 @@ def register(request):
     template = loader.get_template('register.html')
     return HttpResponse(template.render())
 
-def error404(request):
-    template = loader.get_template('error404.html')
-    return HttpResponse(template.render())
+# def error404(request, exception):
+#     template = loader.get_template('404.html')
+#     return HttpResponse(content=template.render(), content_type='text/html: charset=utf8', status=404)
+
+# def error500(request):
+#     template = loader.get_template('500.html')
+#     return HttpResponse(content=template.render(), content_type='text/html: charset=utf8', status=500)
 
 def forgot_password(request):
     template = loader.get_template('forgot-password.html')
@@ -144,3 +148,11 @@ def del_solicitar(request, id):
         'de':de
     }
     return HttpResponse(template.render(context, request))
+
+def error404(request, exception):
+    template = loader.get_template('404.html')
+    return HttpResponse(template.render(), status=404)
+
+def error500(request):
+    template = loader.get_template('500.html')
+    return HttpResponse(template.render(), status=500)
