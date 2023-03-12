@@ -151,8 +151,8 @@ def del_solicitar(request, id):
 
 def error404(request, exception):
     template = loader.get_template('404.html')
-    return HttpResponse(template.render(), status=404)
+    return HttpResponse(template.render())
 
 def error500(request):
     template = loader.get_template('500.html')
-    return HttpResponse(template.render(), status=500)
+    return HttpResponse(template.render())

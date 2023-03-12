@@ -2,10 +2,15 @@
 {% load bootstrap5 %}
 {% load static %}
 {% bootstrap_css %}
-{% block title %}Error (404){% endblock %}
+{% block title %}404{% endblock %}
 {% block content %}
-<h1 class="text-gray-800">Erro (404)</h1>
-<p class="h4 text-gray-800">A pagina que voce solicitou, não existe</p>
-<a href="{% url 'dashboard' %}" class="btn btn-primary mt-5">Volte para a pagina inicial</a>
+<div class="container">
+    <div class="text-center">
+        <div class="error mx-auto" data-text="404">404</div>
+        <p class="lead text-gray-800 mb-5">Page Not Found</p>
+        <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
+        <a href="#">&larr; Back to Dashboard</a>
+    </div>
+</div>
 {% bootstrap_javascript %}
 {% endblock %}

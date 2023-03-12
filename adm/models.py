@@ -1,5 +1,5 @@
 from django.db import models
-# from .utils import get_status_display
+from stdimage.models import StdImageField
 
 class Gerenciador(models.Model):
     nome = models.CharField('Nome', max_length=150)
@@ -17,25 +17,28 @@ class Receita(models.Model):
     def __str__(self) -> str:
         return f'{self.tipo_receita.title().strip()} R${self.valor}'
 
-# def get_status_display(value):
-#     if value:
-#         return 'Concluído'
-#     else:
-#         return 'Não Concluído'
-
-
 class Solicitacoes(models.Model):
     titulo = models.CharField('Titulo da solicitação', max_length=75)
     conteudo = models.CharField('Conteudo da solicitação', max_length=125)
     adm = models.ForeignKey(Gerenciador, on_delete=models.CASCADE)
     concluido = models.BooleanField(default=False)
-    # status = models.CharField(max_length=20, choices=[(False, 'Não Concluído'), (True, 'Concluído')], default=get_status_display(False))
 
     def __str__(self):
         return self.titulo
-    
-# class Teste(models.Model):
-#     nome = models.CharField('Nome',max_length=50)
-#     sobrenome = models.CharField('Sobrenome',max_length=50)
-#     email = models.EmailField('Email')
-#     ativo = models.BooleanField('Ativo?',default=False)
+
+class CategoriaProduto(models.Model):
+    nome_categoria = models.CharField('Nome da categoria',max_length=25)
+
+    def __str__(self):
+        return self.nome_categoria
+
+class Produto(models.Model):
+    nome_produto = models.CharField('Nome do produto', max_length=150)
+    preco_unitario = models.DecimalField('Preço unitario', max_digits=6, decimal_places=2)
+    estoque = models.IntegerField('Estoque disponivel')
+    imagem = StdImageField('Imagem do Produto', upload_to='produtos', variations={'thumb': {'width':450, 'height':300, 'crop':True}})
+    categoria = models.ForeignKey(CategoriaProduto, on_delete=models.CASCADE, default='')
+    postado_por = models.ForeignKey(Gerenciador, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.nome_produto} R${self.preco_unitario}'

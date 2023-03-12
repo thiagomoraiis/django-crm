@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Receita, Solicitacoes, Gerenciador
+from .models import Receita, Solicitacoes, Gerenciador, CategoriaProduto
+from .models import Produto
 
 @admin.register(Receita)
 class ReceitaAdminModel(admin.ModelAdmin):
@@ -12,3 +13,11 @@ class SolicitacaoModelAdmin(admin.ModelAdmin):
 @admin.register(Gerenciador)
 class GerenciadorModelAdmin(admin.ModelAdmin):
     list_display = ('nome', 'idade', 'email')
+
+@admin.register(Produto)
+class ProdutoModelAdmin(admin.ModelAdmin):
+    list_display = ('nome_produto', 'preco_unitario', 'estoque', 'postado_por')
+
+@admin.register(CategoriaProduto)
+class CategoriaModelAdmin(admin.ModelAdmin):
+    list_display = ('nome_categoria',)
