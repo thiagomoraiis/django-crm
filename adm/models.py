@@ -1,5 +1,7 @@
 from django.db import models
 from stdimage.models import StdImageField
+from django.template.defaultfilters import slugify
+from django.db.models import signals
 
 class Gerenciador(models.Model):
     nome = models.CharField('Nome', max_length=150)
@@ -36,9 +38,23 @@ class Produto(models.Model):
     nome_produto = models.CharField('Nome do produto', max_length=150)
     preco_unitario = models.DecimalField('Preço unitario', max_digits=6, decimal_places=2)
     estoque = models.IntegerField('Estoque disponivel')
-    imagem = StdImageField('Imagem do Produto', upload_to='produtos', variations={'thumb': {'width':450, 'height':300, 'crop':True}})
+    imagem = StdImageField('Imagem do produto', upload_to='produto', variations={'thumb': {'width': 450, 'height': 300, 'crop': True}})
     categoria = models.ForeignKey(CategoriaProduto, on_delete=models.CASCADE, default='')
     postado_por = models.ForeignKey(Gerenciador, on_delete=models.CASCADE)
+    slug = models.SlugField('Slug', editable=False, unique=True, blank=True)
 
     def __str__(self):
-        return f'{self.nome_produto} R${self.preco_unitario}'
+        return self.nome_produto
+
+def produto_pre_save(signal, instance, sender, **kwargs):
+    instance.slug = slugify(instance.nome_produto)
+
+signals.pre_save.connect(produto_pre_save, sender=Produto)
+
+class Venda(models.Model):
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    quantidade = models.PositiveIntegerField('Quantidade')
+    data_venda = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.produto}'

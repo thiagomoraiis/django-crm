@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 from django.http import HttpResponse
-from .models import Receita, Solicitacoes
-from .forms import ReceitaModelForm, SolicitacaoModelForm
+from .models import *
+from .forms import *
 from django.contrib import messages
 from django.db.models import Sum
 
@@ -32,14 +32,6 @@ def register(request):
     template = loader.get_template('register.html')
     return HttpResponse(template.render())
 
-# def error404(request, exception):
-#     template = loader.get_template('404.html')
-#     return HttpResponse(content=template.render(), content_type='text/html: charset=utf8', status=404)
-
-# def error500(request):
-#     template = loader.get_template('500.html')
-#     return HttpResponse(content=template.render(), content_type='text/html: charset=utf8', status=500)
-
 def forgot_password(request):
     template = loader.get_template('forgot-password.html')
     return HttpResponse(template.render())
@@ -63,7 +55,6 @@ def form(request):
             messages.error(request, 'Erro ao salvar o formulario')
     else:
         form = ReceitaModelForm()
-        # messages.success(request, 'Erro ao salvar o formulario')
     context = {
         'form':form
     }
@@ -156,3 +147,30 @@ def error404(request, exception):
 def error500(request):
     template = loader.get_template('500.html')
     return HttpResponse(template.render())
+
+def produto_form(request):
+    template = loader.get_template('produto_form.html')
+    if request.method == 'POST':
+        form = ProdutoModelForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'Erro ao cadastrar o produto')
+            form = ProdutoModelForm()
+    else:
+        form = ProdutoModelForm()
+    context = {
+        'form':form
+    }
+    return HttpResponse(template.render(context, request))
+
+def car(request):
+    template = loader.get_template('car.html')
+    prod = Produto.objects.all()
+    carrin = Venda.objects.count()
+    context = {
+        'carrin':carrin,
+        'prod':prod,
+    }
+    return HttpResponse(template.render(context, request))

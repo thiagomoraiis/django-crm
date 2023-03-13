@@ -5,3 +5,26 @@
 */
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
+// pega os elementos HTML
+const decrementButton = document.querySelector('#decrement');
+const incrementButton = document.querySelector('#increment');
+const countInput = document.querySelector('#count');
+
+// adiciona o comportamento de decremento ao botão de decremento
+numero = 1;
+
+function less() {
+  numero--;
+  setValue(numero);
+}
+
+function more() {
+  numero++;
+  setValue(numero);
+}
+
+function setValue(value) {
+  document.getElementById('num').value = value;
+}
+
+setValue(numero);

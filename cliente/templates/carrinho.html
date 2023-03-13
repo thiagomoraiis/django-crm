@@ -1,0 +1,41 @@
+{% extends 'basep.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% block title %}{% endblock %}
+{% block content %}
+<div class="container">
+    <h1 class="text-gray-800 text-center">Carrinho</h1>
+     {% for i in p %}
+     <div class="d-flex row border rounded mb-3">
+      <div class="d-flex justify-content-start m-2 p-2">
+        <div class="pe-5 col-3" style="margin-right:3em;">
+            <img class="rounded" src="{{ i.imagem.thumb.url }}" alt="" >
+        </div>
+        <div class="col-3">
+            <p>Produto {{ i.nome_produto }}</p>
+            <p>Preço {{ i.preco_unitario }}</p>
+            <p>Categoria {{ i.categoria }}</p>
+            <form action="" method="post">{% csrf_token %}
+                <div class="col mb-3">
+                    <div class="d-flex">
+                        <button onclick="less();" id="menos" style="font-size: 20px; padding: 5px 10px;border-radius: 50%;background-color: #ccc;border: none;cursor: pointer;margin-right: 10px;">-</button>
+                        <input class="form-control text-center me-3" name="quantidade" type="number" id="num" value="1" style="max-width: 3rem" />
+                        <button onclick="more();" id="mais" style="font-size: 20px; padding: 5px 10px;border-radius: 50%;background-color: #ccc;border: none;cursor: pointer;margin-right: 10px;">+</button>
+                    </div>
+                </div>
+                <div class="col mb-3">
+                    <button type="submit" class="btn btn-success">Finalizar compra</button>
+                </div>
+            </form>
+        </div>
+        <div class="d-flex flex-direction-column">
+            <a href=""><i class="bi bi-pencil" ></i></a>
+            <a href=""><i class="bi bi-trash3-fill" ></i></a>
+        </div>
+      </div>
+     </div>
+     {% endfor %}
+</div>
+{% bootstrap_javascript %}
+{% endblock %}

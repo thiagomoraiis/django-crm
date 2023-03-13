@@ -1,16 +1,26 @@
 from django import forms
-from .models import Receita,Solicitacoes
+from .models import *
 
 class ReceitaModelForm(forms.ModelForm):
     class Meta:
         model = Receita
         fields = '__all__'
 
+class ProdutoModelForm(forms.ModelForm):
+    class Meta:
+        model = Produto
+        fields = ['nome_produto', 'preco_unitario', 'imagem', 'categoria', 'estoque', 'postado_por']
+
+
 class SolicitacaoModelForm(forms.ModelForm):
 
     class Meta:
         model = Solicitacoes
         fields = ('titulo', 'conteudo', 'adm', 'concluido')
+
+
+
+
         # widgets = {
         #     'concluido': forms.CheckboxInput
         # }

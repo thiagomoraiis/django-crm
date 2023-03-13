@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% block title %}{% endblock %}
+{% block content %}
+<div class="container">
+
+    {% for i in prod %}
+    <div class="">
+        <p>Produto {{ i.nome_produto }}</p>
+        <p>Preço {{ i.preco_unitario }}</p>
+        <p>Categoria {{ i.categoria }}</p>
+        <div class="d-flex">
+            Imagem
+        </div>
+        <img src="{{ obj.imagem.thumb.url }}">
+      </div>
+      <form action="" method="post">{% csrf_token %}
+        <div class="col mb-3">
+            <div class="d-flex">
+                <button onclick="less();" id="menos" style="font-size: 20px; padding: 5px 10px;border-radius: 50%;background-color: #ccc;border: none;cursor: pointer;margin-right: 10px;">-</button>
+                <input class="form-control text-center me-3" name="quantidade" type="number" id="num" value="1" style="max-width: 3rem" />
+                <button onclick="more();" id="mais" style="font-size: 20px; padding: 5px 10px;border-radius: 50%;background-color: #ccc;border: none;cursor: pointer;margin-right: 10px;">+</button>
+            </div>
+        </div>
+        <div class="col mb-3">
+            <button type="submit" class="btn btn-success">Finalizar compra</button>
+        </div>
+      </form>
+    {% endfor %}
+
+</div>
+{% bootstrap_javascript %}
+{% endblock %}
